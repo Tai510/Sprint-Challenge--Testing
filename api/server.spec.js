@@ -5,10 +5,10 @@ const server = require('./server.js');
 describe('server', () =>{
 describe('GET /', () => {
     it('should return 200 OK', () => {
-        return request(server)
-        .get('/') 
-        .then(res => {
-        expect(200)
+    return request(server)
+    .get('/') 
+    .then(res => {
+    expect(200)
         });
     });
 });
@@ -34,5 +34,21 @@ describe('GET /', () => {
     .toEqual({ api: 'running' })
 })
 
+});
 
+describe("POST [/games]", () => {
+    it("should return status 422 if request is missing required fields", async () => {
+    const res = await request(server)
+    .post("/games")
+    .send({ title: "" });
+    expect(res.status).toBe(422);
+  });
+
+  it("should return with an id", async () => {
+    const game = {
+    title: "Halo",
+    genre: "First-person Shooter",
+    releaseYear: "2001"
+    };
+});
 });
